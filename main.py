@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from http.client import HTTPConnection
 from urllib.parse import urlparse
