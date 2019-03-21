@@ -6,6 +6,7 @@ import optparse
 import sqlite3
 import json
 import re
+import os
 
 
 
@@ -149,7 +150,7 @@ class ServiceHandler:
 
 
 p = optparse.OptionParser()
-p.set_defaults(addr='1992', db='main.db')
+p.set_defaults(addr=os.environ['PORT'], db='main.db')
 p.add_option('--addr', dest='addr', help='set net address')
 p.add_option('--db', dest='db', help='set database file')
 (o, args) = p.parse_args()
