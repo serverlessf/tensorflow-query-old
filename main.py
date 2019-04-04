@@ -10,6 +10,7 @@ import os
 
 
 
+PORT = '8000'
 SQL_TYPE = {
   'bool': 'REAL',
   'int': 'REAL',
@@ -149,13 +150,15 @@ class ServiceHandler:
     httpd.serve_forever()
 
 
+try: PORT = os.environ['PORT']
+except: None
 p = optparse.OptionParser()
-p.set_defaults(addr=os.environ['PORT'], db='main.db')
-p.add_option('--addr', dest='addr', help='set net address')
+p.set_defaults(port=PORT, db='main.db')
+p.add_option('--port', dest='port', help='set port number')
 p.add_option('--db', dest='db', help='set database file')
 (o, args) = p.parse_args()
 
-addr = addr_loads(o.addr)
+port = int(o.port)
 serv = ServiceHandler(o.db)
-print('Starting service on', addr)
-serv.start(addr)
+print('Starting service on port', port)
+serv.start(('', port))
